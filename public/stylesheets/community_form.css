@@ -1,0 +1,44 @@
+@media (max-width:993px) {
+
+    .getstarted-button {
+        margin-top: 10px;
+        margin-bottom: 20px;
+        text-align: right;
+    }
+
+
+}
+
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    color : #2a0101;
+
+}
+
+.navbar .nav-item:hover .dropdown-menu {
+    display: block;
+}
+
+.navbar-nav .nav-item:hover .nav-link {
+    color:#b5223e;
+}
+
+.community_form-maintitle{
+    margin-top: 70px;
+}
+
+.community_form{
+    padding: 60px;
+    margin-top: 50px;
+}
+.main-title{
+    margin-bottom: 40px;
+}
+.small-title{
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.small{
+    font-size: 1.0rem;
+}

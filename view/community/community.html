@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../../public/stylesheets/community.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <title>Community</title>
+        <script type="text/javascript"  src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <style>
+            @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+            body {
+                font-family: 'Noto Sans KR', sans-serif;
+            }
+            @media (max-width:993px) {
+                .getstarted-button {
+                    margin-top: 10px;
+                    margin-bottom: 20px;
+                    text-align: right;
+                }
+            }
+            .navbar .nav-item:hover .dropdown-menu {display: block;}
+            .navbar-nav .nav-item:hover .nav-link {color: #b5223e;}
+        </style>
+    </head>
+
+    <script type="text/javascript">
+    
+        var totalData = 1000;    // 총 데이터 수
+        var dataPerPage = 20;    // 한 페이지에 나타낼 데이터 수
+        var pageCount = 10;        // 한 화면에 나타낼 페이지 수
+        
+        function paging(totalData, dataPerPage, pageCount, currentPage){
+            
+            console.log("currentPage : " + currentPage);
+            
+            var totalPage = Math.ceil(totalData/dataPerPage);    // 총 페이지 수
+            var pageGroup = Math.ceil(currentPage/pageCount);    // 페이지 그룹
+            
+            console.log("pageGroup : " + pageGroup);
+            
+            var last = pageGroup * pageCount;    // 화면에 보여질 마지막 페이지 번호
+            if(last > totalPage)
+                last = totalPage;
+            var first = last - (pageCount-1);    // 화면에 보여질 첫번째 페이지 번호
+            var next = last+1;
+            var prev = first-1;
+            
+            console.log("last : " + last);
+            console.log("first : " + first);
+            console.log("next : " + next);
+            console.log("prev : " + prev);
+     
+            var $pingingView = $("#paging");
+            
+            var html = "";
+            
+            if(prev > 0)
+                html += "<a href=# id='prev'><</a> ";
+            
+            for(var i=first; i <= last; i++){
+                html += "<a href='#' id=" + i + ">" + i + "</a> ";
+            }
+            
+            if(last < totalPage)
+                html += "<a href=# id='next'>></a>";
+            
+            $("#paging").html(html);    // 페이지 목록 생성
+            $("#paging a").css("color", "black");
+            $("#paging a#" + currentPage).css({"text-decoration":"none", 
+                                               "color":"red", 
+                                               "font-weight":"bold"});    // 현재 페이지 표시
+                                               
+            $("#paging a").click(function(){
+                
+                var $item = $(this);
+                var $id = $item.attr("id");
+                var selectedPage = $item.text();
+                
+                if($id == "next")    selectedPage = next;
+                if($id == "prev")    selectedPage = prev;
+                
+                paging(totalData, dataPerPage, pageCount, selectedPage);
+            });
+                                               
+        }
+        
+        $("document").ready(function(){        
+            paging(totalData, dataPerPage, pageCount, 1);
+        });
+    </script>
+
+    <body>
+        <div class="container" style="height: 80vh;">
+            <h1 class="community-title">Community</h1>
+            <!-- questions and search bar-->
+            <div class = "search">
+                <div class="post-num"><span id="post-num">21,342,252</span> <span>questions</span></div>
+                <!-- Search form -->
+                <form action="#">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search tags..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <hr id="header-hr">
+            <div class="main-questions"> <!--메인 타이틀을 누르면 세부 내용으로 넘어가야됨..!-->
+                <span id="question-title">How do I? README</span>
+                <p id="question-content">This is a place to ask about how you can do the things you want to do in Data Infuser. 
+                    Data Infuser is really powerful, and there’s a lot you can do! So ask away, 
+                    and help other people figure out how to build the apps they want by chiming in. 
+                    A few guidelines: The more detail the better – give the commu …</p>
+                <hr>
+            </div>    
+
+            <div class = "question" >
+                <a href="community_form.html">
+                <button class="go-question" type="button">Ask Question</button></a>
+            </div>
+            <div id="paging"></div>
+        </div>
+        <hr id="footer-hr">
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+                crossorigin="anonymous">
+        </script>
+
+    </body>
+
+</html>
